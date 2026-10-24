@@ -1,0 +1,96 @@
+/* Tarjeta de presentación virtual · Diego Sebastián Jaime Velásquez Figueroa
+   Paleta lila suave. Dos temas (oscuro y claro) controlados con variables CSS. */
+
+@font-face{font-family:"Press Start 2P";src:url("../assets/fonts/PressStart2P-latin.woff2") format("woff2");font-display:swap}
+
+:root{
+  --px:"Press Start 2P",ui-monospace,Menlo,Consolas,monospace;
+  --bg:#231B3A;--bg2:#2E2449;--in:#271F40;--bar:#4B3B7A;--bdr:#4B3B7A;--dash:#8F7BC8;--sh:#1A1429;
+  --ink:#EDE7FA;--ink2:#D8CCF2;--mute:#B7A8D9;--hi:#F6F1FF;--barink:#F6F1FF;--acc:#DCCBFA;--bul:#CBB6F7;
+  --b1:#C2A3F7;--b1i:#231B3A;--b1s:#7E5CC4;--b2:#DCCBFA;--b2i:#231B3A;--b2s:#9A82D0;
+  --grid:rgba(203,182,247,.07);--focus:#F6F1FF;color-scheme:dark;
+}
+[data-theme="light"]{
+  --bg:#EFE9FA;--bg2:#FBF8FF;--in:#F4EEFC;--bar:#6B4FB0;--bdr:#8B6FD0;--dash:#8B6FD0;--sh:#CDBFEA;
+  --ink:#2F2347;--ink2:#4A3B69;--mute:#5E5078;--hi:#2F2347;--barink:#FFFFFF;--acc:#5B3FA0;--bul:#E6DBFB;
+  --b1:#6B4FB0;--b1i:#FFFFFF;--b1s:#3F2D75;--b2:#D9C9F7;--b2i:#2A1F45;--b2s:#8B6FD0;
+  --grid:rgba(107,79,176,.08);--focus:#2F2347;color-scheme:light;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 24px 56px;display:flex;flex-direction:column;gap:28px}
+main{display:flex;flex-direction:column;gap:28px}
+.px{font-family:var(--px);font-weight:400}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;padding:10px 14px;background:var(--b1);color:var(--b1i);font-weight:600}
+.skip:focus{left:8px;z-index:9}
+
+/* Barra de estado (HUD) */
+.hud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;font:11px/1.6 var(--px);text-transform:uppercase;color:var(--mute)}
+.hud b{font-weight:400;color:var(--acc)}
+.tog{min-height:44px;padding:8px 12px;font:11px/1.4 var(--px);text-transform:uppercase;color:var(--acc);background:transparent;border:3px solid var(--dash);cursor:pointer}
+.tog:hover{border-color:var(--acc)}
+
+/* Ventanas */
+.win{min-width:0;border:4px solid var(--bdr);background:var(--bg2);box-shadow:8px 8px 0 var(--sh)}
+.win__bar{display:flex;align-items:center;gap:10px;margin:0;padding:10px 16px;background:var(--bar);font:400 11px/1.6 var(--px);text-transform:uppercase;color:var(--barink)}
+.win__bar::before{content:"";flex:none;width:8px;height:8px;background:var(--bul)}
+.win__body{padding:clamp(20px,3vw,28px)}
+.head{display:flex;flex-direction:column;gap:20px;padding:clamp(24px,4vw,40px) clamp(20px,4vw,40px)}
+h1{margin:0;font:400 clamp(18px,3.4vw,32px)/1.5 var(--px);color:var(--hi);overflow-wrap:anywhere}
+.role{margin:0;font-size:clamp(16px,2vw,20px);font-weight:600;line-height:1.5;color:var(--acc)}
+.intro{margin:0;max-width:760px;color:var(--ink2)}
+
+/* Frase personal (cuadro de diálogo) */
+.dialog{position:relative;margin-top:8px;padding:clamp(28px,4vw,44px) clamp(20px,4vw,40px) clamp(24px,4vw,40px);border:4px solid var(--b1);background:var(--in);box-shadow:8px 8px 0 var(--sh)}
+.dialog__name{position:absolute;top:-17px;left:20px;margin:0;padding:6px 12px;background:var(--b1);color:var(--b1i);font:11px/1.6 var(--px);text-transform:uppercase}
+.dialog blockquote{margin:0;font:clamp(13px,2.3vw,24px)/1.9 var(--px);color:var(--hi)}
+.dialog::after{content:"";position:absolute;right:18px;bottom:14px;width:12px;height:12px;background:var(--b1);animation:blink 1s step-end infinite}
+
+/* Coven y contacto */
+.grid{display:flex;flex-wrap:wrap;align-items:stretch;gap:28px}
+.grid>.win:first-child{flex:3 1 480px}
+.grid>.win:last-child{flex:2 1 340px}
+.stackc{display:flex;flex-direction:column;gap:28px}
+.cover{margin:0;display:flex;aspect-ratio:16/9;overflow:hidden;border:4px solid var(--bdr);background:var(--in)}
+.cover img{display:block;width:100%;height:100%;object-fit:cover}
+.cover__ph{flex:1;margin:12px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border:4px dashed var(--dash);color:var(--ink2)}
+.cover__ph svg{width:48px;height:36px;fill:var(--dash)}
+.cover__ph p{margin:0}
+.small{font-size:13px;color:var(--mute)}
+h3.coven{margin:20px 0 6px;font:400 20px/1.5 var(--px);color:var(--hi)}
+.desc{margin:0 0 22px;color:var(--ink2)}
+.url{margin:20px 0 0;font-size:14px;line-height:1.5;color:var(--mute);overflow-wrap:anywhere}
+.lbl{margin:0 0 8px;font:400 11px/1.6 var(--px);text-transform:uppercase;color:var(--hi)}
+.note{margin:0 0 14px;font-size:14px;line-height:1.5;color:var(--mute)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:44px;padding:16px 24px;font:400 14px/1.4 var(--px);text-decoration:none;color:var(--b1i);background:var(--b1);box-shadow:0 6px 0 var(--b1s);transition:transform .08s steps(2),filter .08s}
+.btn:hover{transform:translateY(2px);filter:brightness(1.08)}
+.btn:active{transform:translateY(6px);box-shadow:none}
+.btn svg{flex:none;width:12px;height:21px;fill:currentColor}
+.btn--2{padding:16px 20px;font-size:12px;color:var(--b2i);background:var(--b2);box-shadow:0 6px 0 var(--b2s)}
+:is(.btn,.tog,.skip):focus-visible,.slot:focus-within{outline:3px solid var(--focus);outline-offset:4px}
+
+/* Inventario: espacios reservados */
+.slots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:12px}
+.slot{position:relative;min-height:84px;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;border:4px dashed var(--dash);background:var(--in);font-size:14px;font-weight:600;line-height:1.4;color:var(--ink2)}
+.slot small{font-size:12px;font-weight:400;color:var(--mute)}
+.slot--on{border-style:solid;border-color:var(--b1)}
+.slot a{color:inherit;text-decoration:none}
+.slot a::after{content:"";position:absolute;inset:0}
+
+/* Leyenda */
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;font-size:14px;line-height:1.5;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:10px}
+.legend svg{flex:none;width:8px;height:14px;fill:var(--acc)}
+.legend i{flex:none;width:16px;height:16px;border:3px dashed var(--dash)}
+
+/* Animaciones moderadas */
+@keyframes blink{50%{opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}}
+.win,.dialog{animation:pop .45s steps(4,end) backwards}
+.grid>.win:last-child{animation-delay:.12s}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
