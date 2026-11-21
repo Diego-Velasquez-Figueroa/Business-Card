@@ -31,6 +31,12 @@ main{display:flex;flex-direction:column;gap:28px}
 .hud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;font:11px/1.6 var(--px);text-transform:uppercase;color:var(--mute)}
 .tog{min-height:44px;padding:8px 12px;font:11px/1.4 var(--px);text-transform:uppercase;color:var(--acc);background:transparent;border:3px solid var(--dash);cursor:pointer}
 .tog:hover{border-color:var(--acc)}
+a.tog{display:inline-flex;align-items:center;text-decoration:none}
+/* Selector de perfil (videojuegos / software) */
+.switch{display:flex;border:3px solid var(--dash)}
+.switch a{display:flex;align-items:center;min-height:38px;padding:6px 12px;color:var(--acc);text-decoration:none}
+.switch a[aria-current="page"]{background:var(--b1);color:var(--b1i)}
+.switch a:not([aria-current]):hover{background:var(--in)}
 
 /* Ventanas */
 .win{min-width:0;border:4px solid var(--bdr);background:var(--bg2);box-shadow:8px 8px 0 var(--sh)}
@@ -45,6 +51,7 @@ h1{margin:0;font:400 clamp(18px,3.4vw,32px)/1.5 var(--px);color:var(--hi);overfl
 /* Frase personal (cuadro de diálogo) */
 .dialog{position:relative;padding:clamp(24px,4vw,40px) clamp(20px,4vw,40px);border:4px solid var(--b1);background:var(--in);box-shadow:8px 8px 0 var(--sh)}
 .dialog blockquote{margin:0;padding-right:20px;font:clamp(13px,2.3vw,24px)/1.9 var(--px);color:var(--hi)}
+.dialog blockquote p{margin:0;text-wrap:balance}
 .dialog::after{content:"";position:absolute;right:18px;bottom:14px;width:12px;height:12px;background:var(--b1);animation:blink 1s step-end infinite}
 
 /* Coven y contacto */
@@ -65,19 +72,61 @@ h3.coven{margin:20px 0 6px;font:400 20px/1.5 var(--px);color:var(--hi)}
 .btn:active{transform:translateY(6px);box-shadow:none}
 .btn svg{flex:none;width:12px;height:21px;fill:currentColor}
 .btn--2{padding:16px 20px;font-size:12px;color:var(--b2i);background:var(--b2);box-shadow:0 6px 0 var(--b2s)}
-:is(.btn,.tog,.skip):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+:is(.btn,.tog,.skip,.switch a):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+
+/* Portada: elección de perfil (toda la tarjeta es clicable a través del botón) */
+.choose{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:28px}
+.pick{position:relative;display:flex;flex-direction:column;transition:border-color .08s}
+.pick .win__body{flex:1;display:flex;flex-direction:column;gap:16px}
+.pick .icon{width:64px;height:40px}
+.icon__a{fill:var(--b1)}
+.icon__b{fill:var(--bg2)}
+.pick h3{margin:0;font:400 clamp(16px,2.2vw,20px)/1.5 var(--px);color:var(--hi)}
+.pick p{margin:0;color:var(--ink2)}
+.pick .btn{align-self:flex-start;margin-top:auto}
+.pick .btn::after{content:"";position:absolute;inset:0}
+.pick .btn:hover,.pick .btn:active{transform:none}
+.pick:hover{border-color:var(--b1)}
+.pick:hover .btn{filter:brightness(1.08)}
+.pick .btn:focus-visible{outline:none}
+.pick:has(.btn:focus-visible){outline:3px solid var(--focus);outline-offset:4px}
+
+/* Etiquetas de herramientas */
+.sub{margin:0 0 12px;font:400 11px/1.6 var(--px);text-transform:uppercase;color:var(--mute)}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tags li{padding:6px 10px;border:3px solid var(--bdr);background:var(--in);font:400 11px/1.4 var(--px);color:var(--ink2)}
+.tags--main li{border-color:var(--b1);color:var(--hi)}
+.desc+.tags{margin:-8px 0 22px}
+
+/* Experiencia */
+.xp{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:24px}
+.xp li{padding-left:16px;border-left:4px solid var(--dash)}
+.xp h3{margin:0;font:400 13px/1.7 var(--px);color:var(--hi)}
+.xp .org{margin:4px 0 0;font-weight:600;color:var(--acc)}
+.xp .date{margin:0;font-size:14px;color:var(--mute)}
+.xp .d{margin:6px 0 0;color:var(--ink2)}
+
+/* Formación */
+.edu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.edu li{display:flex;flex-direction:column;line-height:1.4}
+.edu b{font-weight:600;color:var(--ink)}
+.edu span{font-size:14px;color:var(--mute)}
 
 /* Animaciones moderadas */
 @keyframes blink{50%{opacity:0}}
 @keyframes pop{from{opacity:0;transform:translateY(10px)}}
 .win,.dialog{animation:pop .45s steps(4,end) backwards}
 .grid>.win:last-child{animation-delay:.12s}
+.grid+.grid>.win{animation-delay:.2s}
 
 /* Pantallas pequeñas */
 @media (max-width:480px){
   .wrap{padding:20px 14px 40px;gap:24px}
   main,.grid{gap:24px}
-  .hud{justify-content:flex-start}
+  .hud{justify-content:flex-start;gap:10px 12px}
+  .hud>span{order:-2;flex-basis:100%}
+  .hud .switch{order:-1}
+  .switch a{padding:6px 10px}
   .btn{display:flex;width:100%;padding:14px 16px;gap:12px;font-size:12px}
   .btn--2{font-size:11px}
   .win,.dialog{box-shadow:6px 6px 0 var(--sh)}

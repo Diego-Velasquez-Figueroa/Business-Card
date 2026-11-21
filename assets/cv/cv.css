@@ -1,0 +1,21 @@
+/* CV formato Harvard: una columna, orden cronológico inverso, texto seleccionable (compatible con ATS).
+   Para regenerar el PDF: abrir el .html en Edge/Chrome > Imprimir > Guardar como PDF (Carta, sin encabezados). */
+@page{size:letter;margin:0.45in 0.6in}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;font:10.5pt/1.28 Garamond,"EB Garamond","Times New Roman",serif;color:#000}
+main{max-width:7.2in;margin:0 auto}
+h1{margin:0;text-align:center;font-size:17pt;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.contact{margin:3pt 0 0;text-align:center;font-size:9.5pt}
+.contact a{color:#000;text-decoration:none;white-space:nowrap}
+h2{margin:9pt 0 4pt;padding-bottom:1.5pt;border-bottom:.8pt solid #000;font-size:11pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+p{margin:0}
+.entry{margin:0 0 6pt;break-inside:avoid}
+.row{display:flex;justify-content:space-between;gap:12pt}
+.row b{font-weight:700}
+.row i{font-style:normal}
+.row span:last-child{flex:none;text-align:right}
+ul{margin:2pt 0 0;padding-left:15pt}
+li{margin:0 0 1pt}
+.skills p{margin:0 0 2pt}
+.skills b{font-weight:700}
